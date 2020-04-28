@@ -6,6 +6,8 @@
 - An AZ is one or more discrete data centers, each with redundant power, networking and connectivity, housed in seperate facilites.
 - Edge Locations are endpoints for AWS which are used for caching content. Typically the consists of CloudFront, Amazon's Content Delivery Network(CDN)
 
+---
+
 #### Q1. What is an Amazon VPC?
 
 - Virtual Private Cloud

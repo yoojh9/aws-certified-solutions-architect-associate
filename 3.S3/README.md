@@ -131,6 +131,8 @@ Transfer Acceleration takes advantage of Amazon CloudFront's globally distribute
  - Can be used in conjunction with versioning
  - Can be applied to current versions and previous versions
 
+<br><br>
+
 ---
 
 # AWS Organizations & Consolidated Billing
@@ -140,7 +142,15 @@ Transfer Acceleration takes advantage of Amazon CloudFront's globally distribute
 
   <img src="./BasicOrganization.png" width="450px" height="300px">
 
- ## 2. Advantaes of Consolidated Billing
+  - **조직**: AWS 계정을 단일 단위로 관리할 수 있도록 통합하기 위해 생성하는 개체. AWS Organizations 콘솔을 사용하여 조직 내 모든 계정을 중앙에서 확인하고 관리할 수 있다. 조직은 마스터 계정 하나와 0개 이상의 멤버 계정을 갖는다. 위에는 루트가, 아래에는 조직 단위(OU)가 있는 나무형 계층 구조로 계정을 조직할 수 있다.
+
+  - **조직 단위(OU)**: 루트에 있는 계정을 위한 컨테이너. OU는 다른 OU를 포함할 수 있기 때문에 사용자는 위쪽에는 루트가, 아래쪽에는 OU 가지가, 맨 끝에는 나뭇잎에 해당하는 계정이 있는 거꾸로 된 나무 형태의 계층 구조를 만들 수 있다. 정책을 계층 구조 내의 노드 하나에 연결하면, 정책은 아래쪽으로 내려와 모든 가지(OU)와 잎(계정)에 영향을 준다. 각 OU는 상위 OU 하나만 가질 수 있으며 현재 각 계정은 한 OU의 멤버만 될 수 있다.
+  
+  - **계정**: AWS 리소스를 포함하는 표준 AWS 계정이다. 정책을 계정에 연결해 정책 제어를 해당 계정에만 적용할 수 있다. 조직에는 두 가지 유형의 계정이 있다. 하나는 마스터 계정으로 지정된 단일 계정이며 다른 하나는 멤버 계정이다. 마스터 계정은 조직을 생성하는 계정이다. 마스터 계정은 지급인 계정을 책임지며 멤버 계정에서 발생한 모든 요금을 지불해야 한다. 
+  
+  - **SCP**: Service Control Policies. SCP의 영향을 받는 계정에서 사용자와 역할이 사용할 수 있는 서비스와 작업을 지정하는 정책이다. SCP는 권한을 부여하지 않는다는 점을 제외하고 IAM 권한 정책과 비슷하다. 대신 SCP는 조직, 조직 단위(OU) 또는 계정에 대한 최대 권한을 지정한다. SCP를 조직 루트 또는 OU에 연결하면 SCP가 멤버 계정의 개체에 대한 권한을 제한한다.
+ 
+ ## 2. Advantages of Consolidated Billing
   AWS Organizations의 통합 결제 기능을 사용하여 여러 AWS 계정의 결제를 통합할 수 있다. AWS Organizations의 모든 조직에는 (연결된) 모든 멤버 계쩡의 비용을 지불하는 마스터 계정이 하나씩 있다.
 
   통합 결제의 장점:
@@ -154,3 +164,17 @@ Transfer Acceleration takes advantage of Amazon CloudFront's globally distribute
   - Always use a strong and complex password on root account
   - Paying account should be used for billing purpose only. Do not deploy resource into the paying account
   - Enable/Disable AWS services using Service Control Policies(SCP) either on OU or on individual accounts.
+
+<br><br>
+
+---
+
+# Sharing S3 Buckets Between Account
+
+## 1. 3 different ways to share S3 buckets across accounts
+ - Using Bucket Policies & IAM (applies accross the entire bucket). Programmatic Access Only.
+ - Using Bucket ACLs & IAM (individual objects). Programmatic Access Only.
+ - Cross-account IAM Roles. Programmatic And Console access.
+ 
+
+

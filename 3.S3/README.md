@@ -136,5 +136,21 @@ Transfer Acceleration takes advantage of Amazon CloudFront's globally distribute
 # AWS Organizations & Consolidated Billing
  
  ## 1. What is AWS Organizations?
-  AWS Organizations is an account management service that enables you to consolidate multiple AWS accounts into an organization that you create and centrally manage.
+  AWS organizations는 사용자가 생성해 중앙에서 관리하는 조직으로 여러 AWS 계정을 통합할 수 있는 계정 관리 서비스이다. AWS organizations는 비즈니스의 예산, 보안과 규정 준수 요건을 충족할 수 있는 계정 관리 및 통합 결제 기능을 포함한다. 조직의 관리자로서 조직에서 계정을 생성하고 기존 계정을 조직에 초대할 수 있다.
 
+  <img src="./BasicOrganization.png" width="450px" height="300px">
+
+ ## 2. Advantaes of Consolidated Billing
+  AWS Organizations의 통합 결제 기능을 사용하여 여러 AWS 계정의 결제를 통합할 수 있다. AWS Organizations의 모든 조직에는 (연결된) 모든 멤버 계쩡의 비용을 지불하는 마스터 계정이 하나씩 있다.
+
+  통합 결제의 장점:
+  - 하나의 청구서: 여러 계정에 대해 하나의 청구서를 받는다
+  - 추적 용이: 여러 계정에 걸쳐 요금을 추적하고 비용 및 사용량 데이터 합계를 다운로드 할 수 있다
+  - 사용량 통합: 조직 내 모든 계정에 걸쳐 사용량을 통합하여 대량 구매 요금 할인, 예약 인스턴스 할인 및 
+  - 추가 비용 없음: 통합 결제는 추가 비용 없이 제공된다.
+
+ ## 3. Some Best Practices With AWS Organizations
+  - Always enable multi-factor authentication on root account
+  - Always use a strong and complex password on root account
+  - Paying account should be used for billing purpose only. Do not deploy resource into the paying account
+  - Enable/Disable AWS services using Service Control Policies(SCP) either on OU or on individual accounts.

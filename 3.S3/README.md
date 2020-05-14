@@ -131,6 +131,44 @@ Transfer Acceleration takes advantage of Amazon CloudFront's globally distribute
  - Can be used in conjunction with versioning
  - Can be applied to current versions and previous versions
 
+## 7. Sharing S3 Buckets Between Account
+
+### 1) 3 different ways to share S3 buckets across accounts
+ - Using Bucket Policies & IAM (applies accross the entire bucket). Programmatic Access Only.
+ - Using Bucket ACLs & IAM (individual objects). Programmatic Access Only.
+ - Cross-account IAM Roles. Programmatic And Console access.
+ 
+## 8. Cross Region Replication
+복제는 Amazon S3 버킷 간에 객체를 비동기식으로 자동 복제할 수 있게 한다. 객체 복제를 위해 구성된 버킷은 동일한 AWS 계정 또는 다른 계정이 소유할 수 있다. 다른 AWS 리전 간에, 또는 동일한 리전 내에서 객체를 복사할 수 있다.
+
+ - Versioning must be enabled on both the source and destination buckets
+ - Files in an existing bucket are not replicated automatically
+ - All subsequent updated files will be replicated automatically
+ - Delete markers are not replicated
+ - Deleting individual versions or delete markers will not be replicated
+
+### 1) 객체 복제 유형
+다른 AWS 리전 간에, 또는 동일한 AWS 리전 내에서 객체를 복사할 수 있다.
+ - **교차 리전 복제(CRR)**: 서로 다른 AWS 리전의 Amazon S3 버킷에서 객체를 복사하는데 사용된다
+ - **동일 리전 복제(SRR)**: 같은 AWS 리전의 Amazon S3 버킷에서 객체를 복사하는데 사용된다.
+
+### 2) 복제 요구 사항
+ - 원본 버킷 소유자는 자신의 계정에 대해 원본 및 대상 AWS 리전을 활성화해야 하며, 대상 버킷 소유자는 자신의 계정에 대해 대상 리전을 활성화해야 한다.
+ - 원본 버킷과 대상 버킷 모두 버전 관리를 활성화해야 한다.
+ - Amazon S3가 사용자를 대신해서 대상 버킷에 해당 원본 버킷의 객체를 복제할 권한을 가지고 있어야 한다.
+
+## 9. S3 Transfer Acceleration
+Amazon S3 Transfer Acceleration은 거리가 먼 클라이언트와 S3 버킷 간에 파일을 빠르고, 쉽고, 안전하게 전송할 수 있게 해준다. Transfer Acceleration은 전세계적으로 분산되어 있는 Amazon CloudFront의 엣지 로케이션을 활용한다. 로케이션에 도착한 데이터는 최적화된 네트워크 경로를 통해 Amazon S3로 라우팅된다.
+S3 Transfer Acceleration utilises the CloudFront Edge Network to ccelerate your uploads to S3. Instead of uploading directly to your S3 bucket,
+you can use a distinct URL to upload directly to an edge location whice will then transfer that file to S3. you will get a distinct URL to upload to:
+
+yoojh9.s3-accelerate.amazonaws.com
+
+### 1) Amazon S3 Transfer Acceleration을 사용하는 이유는 무엇인가?
+ - 전 세계 각지에서 중앙의 버킷으로 업로드하는 고객이 있을 경우
+ - 전 세계에 정기적으로 수 기가바이트에서 수 테라바이트의 데이터를 전송할 경우
+ - Amazon S3에 업로드할 경우 인터넷을 통해 사용 가능한 대역폭을 충분히 활용하지 못할 수 있음
+
 <br><br>
 
 ---
@@ -164,17 +202,3 @@ Transfer Acceleration takes advantage of Amazon CloudFront's globally distribute
   - Always use a strong and complex password on root account
   - Paying account should be used for billing purpose only. Do not deploy resource into the paying account
   - Enable/Disable AWS services using Service Control Policies(SCP) either on OU or on individual accounts.
-
-<br><br>
-
----
-
-# Sharing S3 Buckets Between Account
-
-## 1. 3 different ways to share S3 buckets across accounts
- - Using Bucket Policies & IAM (applies accross the entire bucket). Programmatic Access Only.
- - Using Bucket ACLs & IAM (individual objects). Programmatic Access Only.
- - Cross-account IAM Roles. Programmatic And Console access.
- 
-
-

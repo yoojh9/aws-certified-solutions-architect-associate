@@ -135,4 +135,6 @@ Implement Multi-Factor Authentication for all accounts.
 - Group
 - Role
 
-###### → Policy(정책): 하나 또는 다수의 Permissions를 정의한 문서로 JSON파일로 되어 있다. \n Role(롤) : 생성된 Role은 사용자나 그룹에 할당하는 것이 아니라 EC2 같은 AWS 리소스에 할당된다.
+###### → Policy(정책): 하나 또는 다수의 Permissions를 정의한 문서로 JSON파일로 되어 있다.
+
+###### → Role(롤) : 생성된 Role은 사용자나 그룹에 할당하는 것이 아니라 EC2 같은 AWS 리소스에 할당된다.

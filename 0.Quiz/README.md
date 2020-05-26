@@ -93,7 +93,7 @@ Implement Multi-Factor Authentication for all accounts.
 
 <br>
 
-#### Q12. Power User Access allows **\_\_**.
+#### Q12. Power User Access allows \***\*\_\_\*\***.
 
 - Full Access to all AWS services and resources.
 - Read-only access to all AWS services and resources.
@@ -120,7 +120,7 @@ Implement Multi-Factor Authentication for all accounts.
 
 <br>
 
-#### Q15. Every user you create in the IAM systems starts with **\_**.
+#### Q15. Every user you create in the IAM systems starts with **\_\_\_\_**.
 
 - Full Permissions
 - Partial Permissions

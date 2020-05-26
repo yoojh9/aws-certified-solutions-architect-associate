@@ -160,3 +160,35 @@ Implement Multi-Factor Authentication for all accounts.
 ###### AWS CloudFormation → 필요한 모든 AWS 리소스(예: Amazon EC2 인스턴스 또는 Amazon RDS DB 인스턴스)를 설명하는 템플릿을 생성하면 AWS CloudFormation이 해당 리소스의 프로비저닝과 구성을 담당한다.
 
 ###### AWS S3 → Amazon S3는 이제 초당 최소 3,500개의 데이터 추가 요청과 초당 5,500개의 데이터 검색 요청을 처리하는 향상된 성능을 제공한다. 따라서 추가 비용 없이 처리 시간을 대폭 단축할 수 있다.
+
+<br>
+
+#### Q19. You run a meme creation website where users can create memes and then download them for use on their own sites. The original images are stored in S3 and each meme's metadata in DynamoDB. You need to decide upon a low-cost storage option for the memes, themselves. If a meme object is unavailable or lost, a Lambda function will automatically recreate it using the original file from S3 and the metadata from DynamoDB. Which storage solution should you use to store the non-critical, easily reproducible memes in the most cost-effective way?
+
+- S3
+- S3 - IA
+- **S3 - 1Zone-IA**
+- S3 - RRS
+- Glacier
+
+###### S3 – OneZone-IA is the recommended storage for when you want cheaper storage for infrequently accessed objects. It has the same durability but less availability. There can be cost implications if you use it frequently or use it for short lived storage. Glacier is cheaper, but has a long retrieval time. RRS has effectively been deprecated. It still exists but is not a service that AWS want to sell anymore.
+
+<br>
+
+#### Q20. You have uploaded a file to S3. Which HTTP code would indicate that the upload was successful?
+
+- HTTP 404
+- HTTP 501
+- **HTTP 200**
+- HTTP 307
+
+<br>
+
+#### Q21. S3 has eventual consistency for which HTTP Methods?
+
+- PUTS of new Objects and DELETES
+- Overwrite PUTS and DELETES
+- PUTS of new objects and UPDATES
+- UPDATEA and DELETES
+
+###### Amazon S3은 모든 리전의 덮어쓰기 PUT 및 DELETE에 대한 최종 일관성을 제공합니다.

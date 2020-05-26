@@ -16,4 +16,4 @@ Implement Multi-Factor Authentication for all accounts.
 - Will only be able to log in to the console in the region in whice that user was created
 - Will be able to log in to the console only after multi-factor authentication is enabled on their account
 
-  -> To access the console you use an account and password combination. To access AWS programmatically you use a Key and Secret Key combination.
+####### -> To access the console you use an account and password combination. To access AWS programmatically you use a Key and Secret Key combination.

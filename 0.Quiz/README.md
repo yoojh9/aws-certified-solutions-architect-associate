@@ -93,7 +93,7 @@ Implement Multi-Factor Authentication for all accounts.
 
 <br>
 
-#### Q12. Power User Access allows \***\*\_\_\*\***.
+#### Q12. Power User Access allows **\_\_\_\_**.
 
 - Full Access to all AWS services and resources.
 - Read-only access to all AWS services and resources.
@@ -128,7 +128,7 @@ Implement Multi-Factor Authentication for all accounts.
 
 <br>
 
-#### Q16. A **\_** is a document that provides a formal statement of one or more permissions.
+#### Q16. A **\_\_\_** is a document that provides a formal statement of one or more permissions.
 
 - **Policy**
 - User

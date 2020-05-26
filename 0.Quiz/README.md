@@ -138,3 +138,25 @@ Implement Multi-Factor Authentication for all accounts.
 ###### → Policy(정책): 하나 또는 다수의 Permissions를 정의한 문서로 JSON파일로 되어 있다.
 
 ###### → Role(롤) : 생성된 Role은 사용자나 그룹에 할당하는 것이 아니라 EC2 같은 AWS 리소스에 할당된다.
+
+<br>
+
+#### Q17. You have created a new AWS account for your company, and you have also configured multi-factor authentication on the root account. You are about to create your new users. What strategy should you consider in order to ensure that there is good security on this account.
+
+- **Enact a strong password policy: user passwords must be changed every 45 days, with each passwords containing a combination of capital letters, lower case letters, numbers, and special symbols**
+- Require users only to be able to log in using biometric authentication.
+- Restrict login to the corporate network only.
+- Give all users the same password so that if they forget thier password they can just ask their co-workers.
+
+<br>
+
+#### Q18. You have been asked to advise on a scaling concern. The client has an elegant solution that works well. As the information base grows they use CloudFormation to spin up another stack made up of an S3 bucket and supporting compute instances. The trigger for creating a new stack is when the PUT rate approaches 100 PUTs per second. The problem is that as the business grows that number of buckets is growing into the hundreds and will soon be in the thousands. You have been asked what can be done to reduce the number of buckets without changing the basic architecture.
+
+- Refine the key hashing to randomise the name Key to archieve the potential of 300 Puts per second.
+- **Change the trigger level to around 3000 as S3 can now accommodate much higher PUT and GET levels**
+- Upgrade all buckets to S# provisioned IOPS to archieve better perfomance
+- Set up multiple accounts so that per account hard limit on S3 buckets is avoided.
+
+###### AWS CloudFormation → 필요한 모든 AWS 리소스(예: Amazon EC2 인스턴스 또는 Amazon RDS DB 인스턴스)를 설명하는 템플릿을 생성하면 AWS CloudFormation이 해당 리소스의 프로비저닝과 구성을 담당한다.
+
+###### AWS S3 → Amazon S3는 이제 초당 최소 3,500개의 데이터 추가 요청과 초당 5,500개의 데이터 검색 요청을 처리하는 향상된 성능을 제공한다. 따라서 추가 비용 없이 처리 시간을 대폭 단축할 수 있다.

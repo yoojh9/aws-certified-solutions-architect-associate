@@ -41,15 +41,15 @@ Objects consist of the following:
 
 ### 4) S3 Storage Classes
 
-#### 자주 액세스 하는 객체를 위한 스토리지 클래스
+#### [자주 액세스 하는 객체를 위한 스토리지 클래스]
 
-### (1) S3 Standard
+#### (1) S3 Standard
 
 - 99.99% availability 99.999999999% durability, stored redundantly across multiple devices in multiple facilities, and is designed to sustain the loss of 2 facilities concurrently
 
 <br>
 
-#### 자주 액세스하는 객체와 자주 액세스하지 않는 객체를 자동으로 최적화하는 스토리지 클래스
+#### [자주 액세스하는 객체와 자주 액세스하지 않는 객체를 자동으로 최적화하는 스토리지 클래스]
 
 #### (1) S3 Intelligent-Tiering
 
@@ -61,7 +61,7 @@ Objects consist of the following:
 
 <br>
 
-#### 자주 액세스하지 않는 객체를 위한 스토리지 클래스
+#### [자주 액세스하지 않는 객체를 위한 스토리지 클래스]
 
 Amazon S3는 이러한 객체에 대한 검색 요금을 부과하므로 이러한 객체는 자주 액세스되지 않는 데이터에 가장 적합합니다.
 
@@ -77,7 +77,7 @@ Amazon S3는 이러한 객체에 대한 검색 요금을 부과하므로 이러�
 
 <br>
 
-#### 객체 아카이빙을 위한 스토리지 클래스
+#### [객체 아카이빙을 위한 스토리지 클래스]
 
 저비용 데이터 아카이빙을 위해 설계되었습니다. 이러한 스토리지 클래스는 S3 Standard 스토리지 클래스와 동일한 내구성과 복원성을 제공합니다.
 

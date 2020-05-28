@@ -39,7 +39,22 @@ Objects consist of the following:
 - MFA Delete
 - Secure your data using **Access Control Lists** and **Bucket Policies**
 
-### 4) S3 Storage Classes
+#### 4) You are charged for S3 in the following ways
+
+- Storage
+- Requests
+- Storage Managment Pricing
+- Data Transfer Pricing
+- Transfer Acceleration (Permission of object)
+- Cross Region Replication Pricing
+
+#### 5) S3 Transfer Acceleration
+
+Amazon S3 Transfer Acceleration enables fast, easy, and secure transfer of files over long distances between your end users and an s3 bucket.
+
+Transfer Acceleration takes advantage of Amazon CloudFront's globally distributed edge location. As the data arrives at an edge location, data is routes to Amazon S3 over an optimized network path.
+
+## 2. S3 Storage Classes
 
 #### [자주 액세스 하는 객체를 위한 스토리지 클래스]
 
@@ -91,22 +106,7 @@ Amazon S3는 이러한 객체에 대한 검색 요금을 부과하므로 이러�
 - S3 Glacier Deep Archive is Amazon S3's lowest-cost storage class where a retrieval time of 12 hours is acceptable
 - 거의 액세스할 필요가 없는 데이터를 보관할 때 사용합니다. S3 Glacier Deep Archive 스토리지 클래스에 저장된 데이터의 최소 스토리지 기간은 180일이고 기본 검색 시간은 12시간입니다.
 
-### 5) You are charged for S3 in the following ways
-
-- Storage
-- Requests
-- Storage Managment Pricing
-- Data Transfer Pricing
-- Transfer Acceleration (Permission of object)
-- Cross Region Replication Pricing
-
-### 6) S3 Transfer Acceleration
-
-Amazon S3 Transfer Acceleration enables fast, easy, and secure transfer of files over long distances between your end users and an s3 bucket.
-
-Transfer Acceleration takes advantage of Amazon CloudFront's globally distributed edge location. As the data arrives at an edge location, data is routes to Amazon S3 over an optimized network path.
-
-### 7) 객체 관련 작업
+## 3. 객체 관련 작업
 
 #### (1) 객체 업로드
 
@@ -117,7 +117,7 @@ Transfer Acceleration takes advantage of Amazon CloudFront's globally distribute
 
 <br>
 
-## 2. S3 Bucket
+## 4. S3 Bucket
 
 - control access to buckets using either a **bucket ACL** or using **Bucket Polices**
 

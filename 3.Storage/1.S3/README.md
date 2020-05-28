@@ -112,6 +112,8 @@ Amazon S3는 이러한 객체에 대한 검색 요금을 부과하므로 이러�
 
 ## 3. 객체 관련 작업
 
+- control access to buckets using either a **bucket ACL** or using **Bucket Polices**
+
 #### (1) 객체 업로드
 
 - **단일 작업으로 객체 업로드**: 단일 PUT 작업으로 최대 5GB 크기의 객체를 업로드할 수 있습니다.
@@ -121,11 +123,7 @@ Amazon S3는 이러한 객체에 대한 검색 요금을 부과하므로 이러�
 
 <br>
 
-## 4. S3 Bucket
-
-- control access to buckets using either a **bucket ACL** or using **Bucket Polices**
-
-## 3. S3 Pricing Tiers
+## 4. S3 Pricing Tiers
 
 ### 1) What makes up the cost of S3?
 
@@ -143,7 +141,7 @@ Amazon S3는 이러한 객체에 대한 검색 요금을 부과하므로 이러�
 - S3 Glacier
 - S3 Glacier Deep Archive
 
-## 4. S3 Security & Encryption
+## 5. S3 Security & Encryption
 
 By default, all newly created buckets are PRIVATE. You can setup access control to your buckets using;
 
@@ -164,7 +162,7 @@ Encryption At Rest(Server Side) is achieved by
 
 Client Side Encryption
 
-## 5. S3 Version Control
+## 6. S3 Version Control
 
 Using **Versioning** With S3;
 
@@ -173,12 +171,6 @@ Using **Versioning** With S3;
 - Once enabled, Versioning cannot be disabled, only suspended.
 - Integrates with Lifecycle rules
 - Versioning's **MFA Delete** capability, which uses multi-factor, can be used to provide an additional layer of security.
-
-## 6. S3 Lifecycle Management and Glacier
-
-- Automates moving your objects between the different storage tier
-- Can be used in conjunction with versioning
-- Can be applied to current versions and previous versions
 
 ## 7. Sharing S3 Buckets Between Account
 

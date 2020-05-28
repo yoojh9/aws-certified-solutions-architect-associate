@@ -233,7 +233,115 @@ Implement Multi-Factor Authentication for all accounts.
 
 #### Q26. One of your users is trying to upload a 7.5GB file to S3. However, they keep getting the following error message: "Your proposed upload exceeds the maximum allowed object size.". What solution to this problem does AWS recommend?
 
-- Design your application to use the Multipart Upload API for all objects
+- **Design your application to use the Multipart Upload API for all objects**
 - Design your application to use large object upload API for this object
 - Raise a ticket with AWS to increase your maximum object size.
 - Log in to the S3 console, click on the bucket and then click properties. You can then increase your maximum object size to 1TB.
+
+<br>
+
+#### Q27. You run a popular photo-sharing website that depends on S3 to store content. Paid advertising is your primary source of revenue. However, you have discovered that other websites are linking directly to the images in your buckets, not to the HTML pages that serve the content. This means that people are not seeing the paid advertising, and you are paying AWS unnecessarily to serve content directly from S3. How might you resolve this issue?
+
+- Use CloudFront to serve the static content
+- **Remove the ability for images to be served publicly to the site and then use signed URLs with expiry dates.**
+- Use security groups to blacklist the IP addresses of the sites that link directly to your S3 bucket.
+- Use EBS rather than S3 to store the content.
+
+<br>
+
+#### Q28. AWS S3 has four different URLs styles that it can be used to access content in S3. The Virtual Hosted Style URL, the Path-Style Access URL, the Static web site URL, and the Legacy Global Endpoint URL. Which of these represents a correct formatting of the Virtual Hosted Style URL style
+
+- https://my-bucket.amazonaws.com/lazycat.docx
+- **https://my-bucket.s3.us-west-2.amazonaws.com/fastpuppy.csv**
+- https://s3.us-west-2.amazonaws.com/my-bucket/slowpuppy.tar
+- http://my-bucket.s3-website.us-east-2.amazonaws.com/index.htm
+- http://my-bucket.s3-website-ap-southeast-2.amazonaws.com/index.php
+
+###### → Virtual style puts your bucket name 1st, s3 2nd, and the region 3rd. Path style puts s3 1st and your bucket as a sub domain. Legacy Global endpoint has no region. S3 static hosting can be your own domain or your bucket name 1st, s3-website 2nd, followed by the region. AWS are in the process of phasing out Path style, and support for Legacy Global Endpoint format is limited and discouraged. However it is still useful to be able to recognize them should they show up in logs. https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
+
+<br>
+
+#### Q29. You work for a major news network in Europe. They have just released a new mobile app that allows users to post their photos of newsworthy events in real-time, which are then reviewed by your editors before being copied to your website and made public. Your organization expects this app to grow very quickly, essentially doubling its user base each month. The app uses S3 to store the images, and you are expecting sudden and sizable increases in traffic to S3 when a major news event takes place (as users will be uploading large amounts of content.) You need to keep your storage costs to a minimum, and it does not matter if some objects are lost. With these factors in mind, which storage media should you use to keep costs as low as possible?
+
+- S3 - Infrequently Accessed Storage
+- S3 - One Zone-Infrequent Access
+- S3 - Reduced Redundancy Storage(RRS)
+- Glacier
+- S3 - Provisioned IOPS
+
+###### → The key driver here is cost, so an awareness of cost is necessary to answer this. Full S3 is quite expensive at around $0.023 per GB for the lowest band. S3 standard IA is $0.0125 per GB, S3 One-Zone-IA is $0.01 per GB, and Legacy S3-RRS is around $0.024 per GB for the lowest band. Of the offered solutions SS3 One-Zone-IA is the cheapest suitable option. Glacier cannot be considered as it is not intended for direct access, however it comes in at around \$0.004 per GB. Of course you spotted that RRS is being deprecated, and there is no such thing as S3 – Provisioned IOPS. In this case OneZone
+
+<br>
+
+#### Q30. How many S3 buckets can I have per account by default?
+
+- 10
+- 20
+- 50
+- **100**
+
+<br>
+
+#### Q31. You work for a busy digital marketing company who currently store their data on-premise. They are looking to migrate to AWS S3 and to store their data in buckets. Each bucket will be named after their individual customers, followed by a random series of letters and numbers. Once written to S3 the data is rarely changed, as it has already been sent to the end customer for them to use as they see fit. However, on some occasions, customers may need certain files updated quickly, and this may be for work that has been done months or even years ago. You would need to be able to access this data immediately to make changes in that case, but you must also keep your storage costs extremely low. The data is not easily reproducible if lost. Which S3 storage class should you choose to minimize costs and to maximize retrieval times?
+
+- S3
+- **S3 - IA**
+- S3 - 1Zone-IA
+- S3 - RRS
+- Glacier
+
+###### → The need to immediate access is an important requirement along with cost. Glacier has a long recovery time at a low cost or a shorter recovery time at a high cost, and 1Zone-IA has a lower Availability level which means that it may not be available when needed.
+
+<br>
+
+#### Q32. What is the availabillity of objects stored in S3?
+
+- 99%
+- 99.90%
+- 99.99%
+- 100%
+
+<br>
+
+#### Q33. S3 has what consistency model for PUTS of new objects?
+
+- **Read After Write Consistency**
+- Write After Read Consistency
+- Eventual Consistency
+- Usual Consistency
+
+ <br>
+
+#### Q34. What does S3 stand for?
+
+- Simple SQL Service
+- **Simple Storage Service**
+- Simplified Serial Sequence
+- Straight Storage Service
+
+<br>
+
+#### Q35. You are a solutions architect who works with a large digital media company. The company has decided that they want to operate within the Japanese region and they need a bucket called "testbucket" set up immediately to test their web application on. You log in to the AWS console and try to create this bucket in the Japanese region however you are told that the bucket name is already taken. What should you do to resolve this?
+
+- Change your region to Korea and then create the bucket "testbucket".
+- Raise a ticker with AWS and ask them to release the name "testbucket" to you.
+- Bucket names are global, not regional. This is a popular bucket name and is already taken. You should choose another bucket name.
+- Run a WHOIS request on the bucket name and get the registered owners email address. Contact the owner and ask if you can purchase the rights to the bucket.
+
+<br>
+
+#### Q36. What is the minimum file size that I can store on S3?
+
+- 1KB
+- 1MB
+- **0bytes**
+- 1byte
+
+<br>
+
+#### Q37. What is AWS Storage Gateway?
+
+- **It is a physical or virtual appliance that can be used to cache S3 locally at a customer's site.**
+- It allows large scale import/exports into the AWS cloud without the use of an internet connection.
+- It allows a direct MPLS connection into AWS.
+- None of the above.

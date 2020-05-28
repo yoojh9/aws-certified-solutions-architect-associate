@@ -187,8 +187,53 @@ Implement Multi-Factor Authentication for all accounts.
 #### Q21. S3 has eventual consistency for which HTTP Methods?
 
 - PUTS of new Objects and DELETES
-- Overwrite PUTS and DELETES
+- **Overwrite PUTS and DELETES**
 - PUTS of new objects and UPDATES
 - UPDATEA and DELETES
 
 ###### Amazon S3은 모든 리전의 덮어쓰기 PUT 및 DELETE에 대한 최종 일관성을 제공합니다.
+
+<br>
+
+#### Q22. What is Amazon Glacier?
+
+- A tool that allows you to "freeze" an EBS volume.
+- An AWS service designed for long term data archival.
+- A highly secure firewall designed to keep everything out.
+- It is a tool used to resurrect deleted EC2 snapshots.
+
+<br>
+
+#### Q23. You work for a health insurance company that amasses a large number of patients' health records. Each record will be used once when assessing a customer, and will then need to be securely stored for a period of 7 years. In some rare cases, you may need to retrieve this data within 24 hours of a claim being lodged. Given these requirements, which type of AWS storage would deliver the least expensive solution?
+
+- S3 Standard
+- S3 - IA
+- S3 One Zone - IA
+- **S3 Glacier**
+
+<br>
+
+#### Q24. The difference between S3 and EBS is that EBS is object-based whereas S3 is block-based.
+
+- TRUE
+- **FALSE**
+
+<br>
+
+#### Q25. What is the availability of S3 – OneZone-IA?
+
+- 99.90%
+- **99.50%**
+- 99.99%
+- 100%
+
+###### → OneZone-IA is only stored in one Zone. While it has the same Durability, it may be less Available than normal S3 or S3-IA.
+
+<br>
+
+#### Q26. One of your users is trying to upload a 7.5GB file to S3. However, they keep getting the following error message: "Your proposed upload exceeds the maximum allowed object size.". What solution to this problem does AWS recommend?
+
+- Design your application to use the Multipart Upload API for all objects
+- Design your application to use large object upload API for this object
+- Raise a ticket with AWS to increase your maximum object size.
+- Log in to the S3 console, click on the bucket and then click properties. You can then increase your maximum object size to 1TB.

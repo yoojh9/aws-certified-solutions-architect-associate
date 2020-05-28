@@ -41,29 +41,55 @@ Objects consist of the following:
 
 ### 4) S3 Storage Classes
 
-#### (1) S3 Standard
+#### 자주 액세스 하는 객체를 위한 스토리지 클래스
+
+### (1) S3 Standard
 
 - 99.99% availability 99.999999999% durability, stored redundantly across multiple devices in multiple facilities, and is designed to sustain the loss of 2 facilities concurrently
 
-#### (2) S3 - IA (Infrequently Accessed)
+<br>
 
-- For data that is accessed less frequently, but requires rapid access when needed. Lower fee than S3, but you charged a retrieval fee.
+#### 자주 액세스하는 객체와 자주 액세스하지 않는 객체를 자동으로 최적화하는 스토리지 클래스
 
-#### (3) S3 One Zone - IA
-
-- For where you wnat a lower-cost option for infrequently accessed data, but do not require the multiple Availability Zone data resilience.
-
-#### (4) S3 - Intelligent Tiering
+#### (1) S3 Intelligent-Tiering
 
 - Designed to optimize costs by automatically moving data to the most cost-effective access tier, without performance impact or operational overhead.
+- S3 Intelligent-Tiering 스토리지 클래스는 성능 영향 또는 운영 오버헤드 없이 가장 비용 효율적인 스토리지 액세스 계층으로 데이터를 자동으로 이동하여 스토리지 비용을 최적화하도록 설계되었습니다.
+- S3 Intelligent-Tiering은 액세스 패턴이 변경될 때 자주 액세스하는 계층과 저렴한 비용의 자주 액세스하지 않는 계층 간에 세분화된 객체 수준의 데이터를 이동함으로써 자동 비용 절감 효과를 제공합니다.
+- Intelligent-Tiering 스토리지 클래스는 액세스 패턴을 알 수 없거나 예측할 수 없어 수명이 긴 데이터에 대해 스토리지 비용을 자동으로 최적화하려는 경우 이상적입니다.
+- S3 Intelligent-Tiering 스토리지 클래스는 두 액세스 계층에 객체를 저장합니다. 한 계층은 자주 액세스하는 데이터에 최적화되어 있으며 비용이 저렴한 다른 계층은 자주 액세스하지 않는 데이터에 최적화되어 있습니다.
 
-#### (5) S3 Glacier
+<br>
+
+#### 자주 액세스하지 않는 객체를 위한 스토리지 클래스
+
+Amazon S3는 이러한 객체에 대한 검색 요금을 부과하므로 이러한 객체는 자주 액세스되지 않는 데이터에 가장 적합합니다.
+
+#### (1) S3 - IA (Infrequently Accessed)
+
+- For data that is accessed less frequently, but requires rapid access when needed. Lower fee than S3, but you charged a retrieval fee.
+- Amazon S3가 객체 데이터를 지리적으로 분리된 여러 개의 가용 영역에 중복 저장합니다(S3 Standard 스토리지 클래스와 유사함). S3 Standard-IA 객체는 가용 영역의 손실에 대한 복원성이 있습니다. 이 스토리지 클래스는 S3 One Zone-IA 클래스보다 뛰어난 가용성 및 복원성을 제공합니다.
+
+#### (2) S3 One Zone - IA
+
+- For where you wnat a lower-cost option for infrequently accessed data, but do not require the multiple Availability Zone data resilience.
+- Amazon S3가 객체 데이터를 한 개의 가용 영역에만 저장하므로 S3 Standard-IA보다 비용이 더 저렴합니다. 그러나 데이터는 지진 및 홍수와 같은 재해에 의한 가용 영역의 물리적 손실에 대해서는 복원성이 없습니다.
+
+<br>
+
+#### 객체 아카이빙을 위한 스토리지 클래스
+
+저비용 데이터 아카이빙을 위해 설계되었습니다. 이러한 스토리지 클래스는 S3 Standard 스토리지 클래스와 동일한 내구성과 복원성을 제공합니다.
+
+#### (1) S3 Glacier
 
 - S3 Glacier is a secure, durable, and low-cost storage class for data archiving. You can reliably store any amount of data at costs that are competitive with or cheaper than on-premises solutions. Retrieval times configurable from minutes to hours
+- 분 단위로 데이터의 일부를 검색해야 하는 아카이브에 사용합니다. S3 Glacier 스토리지 클래스에 저장된 데이터는 최소 스토리지 기간이 90일이며 신속 검색을 사용하여 최소 1~5분 이내에 액세스할 수 있습니다.
 
-#### (6) S3 Glacier Deep Archive
+#### (2) S3 Glacier Deep Archive
 
 - S3 Glacier Deep Archive is Amazon S3's lowest-cost storage class where a retrieval time of 12 hours is acceptable
+- 거의 액세스할 필요가 없는 데이터를 보관할 때 사용합니다. S3 Glacier Deep Archive 스토리지 클래스에 저장된 데이터의 최소 스토리지 기간은 180일이고 기본 검색 시간은 12시간입니다.
 
 ### 5) You are charged for S3 in the following ways
 
@@ -79,6 +105,17 @@ Objects consist of the following:
 Amazon S3 Transfer Acceleration enables fast, easy, and secure transfer of files over long distances between your end users and an s3 bucket.
 
 Transfer Acceleration takes advantage of Amazon CloudFront's globally distributed edge location. As the data arrives at an edge location, data is routes to Amazon S3 over an optimized network path.
+
+### 7) 객체 관련 작업
+
+#### (1) 객체 업로드
+
+- **단일 작업으로 객체 업로드**: 단일 PUT 작업으로 최대 5GB 크기의 객체를 업로드할 수 있습니다.
+- **파트로 나누어 객체 업로드**: 멀티파트 업로드 API를 사용하여 최대 5TB의 대형 객체를 업로드할 수 있습니다.
+
+멀티파트 업로드 API는 대용량 객체의 업로드 경험을 개선하기 위해 디자인되었습니다. 객체를 파트별로 업로드할 수 있습니다. 이러한 객체 파트는 임의의 순서로 독립적으로, 그리고 병렬적으로 업로드할 수 있습니다. 크기가 5MB에서 5TB까지인 객체에 대해 멀티파트 업로드를 사용할 수 있습니다.
+
+<br>
 
 ## 2. S3 Bucket
 

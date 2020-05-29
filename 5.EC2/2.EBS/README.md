@@ -1,6 +1,8 @@
 # EBS
 
-## 1. What is EBS?
+## 1. EBS
+
+### 1) What is EBS?
 
 Amazon Elastic Block Store(EBS) provides persistent block storage volumes for use with Amazon EC2 instances in the AWS cloud. Each Amazon EBS volume is automatically replicated within its Availability Zone to protect you from component failure, offering high availability and durability.
 
@@ -8,7 +10,7 @@ Amazon Elastic Block Store(Amazon EBS)는 EC2 인스턴스에 사용할 수 있�
 
 <br>
 
-## 2. 5 Different Types of EBS Storage
+### 2) 5 Different Types of EBS Storage
 
 ##### SSD
 
@@ -23,7 +25,7 @@ Amazon Elastic Block Store(Amazon EBS)는 EC2 인스턴스에 사용할 수 있�
 
 <br>
 
-## Volumes vs Snapshot
+## 2. Volumes vs Snapshot
 
 - Volumes exist on EBS. Think of EBS as a virtual hard disk
 - Snapshots exist on S3. Think of snapshots as a photograph of the disk
@@ -37,3 +39,37 @@ Amazon Elastic Block Store(Amazon EBS)는 EC2 인스턴스에 사용할 수 있�
 - Volumes will always be in the same availability zone as the EC2 instance.
 - To move an EC2 volume from one AZ to another, take a snapshot of it, create an AMI from the snapshot and then use the AMI to launch the EC2 instance in a new AZ.
 - To move an EC2 volume from one region to another, take a snapshot of it, create an AMI from the snapshot and then copy the AMI from one region to the other. Then use the copied AMI to launch the new EC2 instance in the new region.
+
+<br>
+
+## 3. AMI types (EBS vs Instance Store)
+
+You can select your AMI based on:
+
+- Region (see Regions and Availability Zones)
+- Operation System
+- Architecture(32-bit or 64-bit)
+- Launch Permissions
+- Storage for the Root Device(Root Device Volume)
+  - Instance Store(EPHEMERAL STORAGE): Amazon EC2 인스턴스 스토어가 지원하는 AMI
+  - EBS Backed Volumes: Amazon EBS에서 지원하는 AMI
+
+사용자는 Amazon EC2 인스턴스 스토어가 지원하는 AMI와 Amazon EBS에서 지원하는 AMI 중에서 선택할 수 있습니다.
+
+### 1) For EBS Volumes
+
+The root device for an instance launched from the AMI is an Amazon EBS volume created from an Amazon EBS snapshot.
+
+- EBS backed instances can be stopped. You will not lose the data on this instance if it is stopped.
+- You can reboot both, you will not lose your data.
+- By default, both ROOT volumes(EBS, instance) will be deleted on termination. However, with EBS volumes, you can tell AWS to keep the root device volume.
+- Amazon EBS 지원 인스턴스는 중지한 후 다시 시작해도 연결된 볼륨에 저장된 데이터에 아무런 영향이 없습니다.
+- Amazon EBS 지원 인스턴스가 중지 상태일 때 다양한 인스턴스 및 볼륨 관련 작업을 수행할 수 있습니다. 예를 들어 인스턴스의 속성을 수정하거나, 인스턴스의 크기를 변경하거나, 사용하는 커널을 업데이트하거나, 디버깅 등의 목적으로 루트 볼륨을 실행 중인 다른 인스턴스에 연결할 수 있습니다.
+
+### 2) For Instance Store Volumes
+
+The root device for an instance launched from the AMI is an instance store volume created from a template stored in Amazon S3.
+
+- Instance store Volumes are sometimes called Ephemeral Storage.
+- Instance store volumes cannot be stopped. If the Underlying host fails, you will lose your data.
+- 인스턴스 스토어 볼륨의 모든 데이터는 인스턴스가 실행되는 동안 유지되지만, 인스턴스가 종료되거나(인스턴스 스토어 지원 인스턴스는 중지 작업을 지원하지 않음) 장애가 발생하면(예: 기본 드라이브에 문제가 있는 경우) 데이터가 삭제됩니다.

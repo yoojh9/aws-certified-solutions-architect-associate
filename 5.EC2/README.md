@@ -4,6 +4,11 @@
 
 Amazon Elastic Compute Cloud(Amazon EC2) is a web service that provieds resizable compute capacity in the cloud. Amazon EC2 reduces the time required to obtain and boot new server instances to minutes, allowing you to quickly scale capacity, both up and down, as your computing requirements change.
 
+- Termination Protection is turned off by default, you must turn in on
+- On an EBs-backed instance, the default action is for the root EBS volume to be deleted when the instance is terminated.
+- EBS Root Volumes of your DEFAULT AMI's CAN be encrypted. you can also use a third pary tool (Such as bit locker etc) to encrypt the root volume, or this can be done when creating AMI's in the AWS console or using the API.
+- Additional volumes can be encrypted.
+
 <br>
 
 ## 2. EC2 요금

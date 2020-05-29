@@ -73,3 +73,73 @@ The root device for an instance launched from the AMI is an instance store volum
 - Instance store Volumes are sometimes called Ephemeral Storage.
 - Instance store volumes cannot be stopped. If the Underlying host fails, you will lose your data.
 - 인스턴스 스토어 볼륨의 모든 데이터는 인스턴스가 실행되는 동안 유지되지만, 인스턴스가 종료되거나(인스턴스 스토어 지원 인스턴스는 중지 작업을 지원하지 않음) 장애가 발생하면(예: 기본 드라이브에 문제가 있는 경우) 데이터가 삭제됩니다.
+
+<br>
+
+## 4. ENI vs ENA vs EFA
+
+### 1) ENI
+
+Elastic Network Interface - essentially a virtual network card
+An ENI is simply a virtual network card for your EC2 instances.
+
+네트워크 인터페이스에는 다음 속성이 포함될 수 있다
+
+- VPC의 IPv4 주소 범위 중 기본 프라이빗 IPv4 주소
+- VPC의 IPv4 주소 범위 중 하나 이상의 보조 프라이빗 IPv4 주소
+- 프라이빗 IPv4 주소당 한 개의 탄력적 IP 주소(IPv4)
+- 한 개의 퍼블릭 IPv4 주소
+- 한 개 이상의 IPv6 주소
+- 하나 이상의 보안 그룹
+- MAC 주소
+- 원본/대상 확인 플래그
+- 설명
+
+#### 네트워크 인터페이스 시나리오
+
+https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/using-eni.html#scenarios-enis
+
+- 관리 네트워크 생성
+- VPC에서 네트워크 및 보안 어플라이언스 사용
+- 작업/역할이 개별 서브넷에 지정된 이중 홈 인스턴스 생성
+- 저예산 고가용성 솔루션 생성
+
+### 2) EN(Enhanced Networking)
+
+Enhanced Networking. Uses single root I/O virtualization(SR-IOV) to provide high-performance networking capabilities on supported instance types.
+
+- 향상된 네트워킹에서는 지원되는 인스턴스 유형에서 **단일 루트 I/O 가상화(SR-IOV)**를 사용하여 고성능 네트워킹 기능을 제공합니다. SR-IOV는 기존 가상 네트워크 인터페이스에 비해 높은 I/O 성능 및 낮은 CPU 사용률을 제공하는 디바이스 가상화 방법입니다.
+- 향상된 네트워킹을 통해 대역폭과 PPS(Packet Per Second) 성능이 높아지고, 인스턴스 간 지연 시간이 지속적으로 낮아집니다. 향상된 네트워킹 사용에 따르는 추가 요금은 없습니다.
+- Use where you want good network performance.
+
+#### 향상된 네트워킹 유형
+
+인스턴스 유형에 따라 다음 중 한 가지 메커니즘을 사용하여 향상된 네트워킹을 활성화할 수 있습니다.
+
+- **ENA(Elasic Network Adapter)**
+  탄력적 네트워크 어댑터(ENA)는 지원되는 인스턴스 유형에 대해 최대 100Gbps의 네트워크 속도를 지원합니다.
+- **intel 82599 Virtual Function(VF) 인터페이스**
+  intel 82599 Virtual Function 인터페이스는 지원되는 인스턴스 유형에 대해 최대 10Gbps의 네트워크 속도를 지원합니다. This is typically used on older instances.
+
+In any scenario question, you probably want to choose ENA over VF if given the option.
+
+### 3) Elastic Fabric Adapter
+
+A network device that you can attach to your Amazon EC2 instance to accelerate High Performance Computing(HPC) and machine learning application
+
+Elastic Fabric Adapter(EFA)(EFA)는 네트워크 디바이스로 Amazon EC2 인스턴스에 연결하여 HPC(고성능 컴퓨팅, High Performance Computing) 및 기계 학습 애플리케이션 속도를 높일 수 있습니다. EFA는 AWS 클라우드가 제공하는 확장성, 유연성, 탄력성을 통해 온프레미스 HPC 클러스터의 애플리케이션 성능을 확보합니다.
+
+- EFA는 전통적으로 클라우드 기반 HPC 시스템에서 사용하는 TCP 전송보다 지연율이 낮고 일정하며 더 높은 처리량을 제공합니다.
+- EFA는 추가 기능이 있는 ENA(Elastic Network Adapter)입니다. 따라서 추가적인 OS 우회 기능을 포함한 모든 ENA의 기능을 제공합니다. OS 우회는 HPC 및 기계 학습 애플리케이션이 네트워크 인터페이스 하드웨어와 직접 통신하도록 하는 액세스 모델로서 낮은 지연율과 신뢰성 높은 전송 기능을 제공합니다
+- EFA can use OS-bypass. OS-bypass enables HPC and machine learning applications to bypass the operating system kernel and to communicate directly with the EFA device. it make it a lot faster with a lot lower latency. Not supported with Windows currently, only Linux
+
+#### In the exam you will be given different scenarios and you will be asked to choose whether you should use an ENI, EN or EFA
+
+- **ENI**
+  For basic networking. Perhaps you need a seperate management network to your production network or a separate logging network and you need to do this at low cost. In this scenario use multiple ENIs for each network
+
+- **Enhanced Network**
+  For when you need speeds between 10Gbps and 100Gbps. Anywhere you need reliable, high throughput.
+
+- **Elastic Fabric Adaptor**
+  For when you need to accelerate High Performance Computing(HPC) and machine learning applications or if you need to do an OS by-pass. If you see a scenario question mentioning HPC or ML and asking what network adaptor you want, choose EFA

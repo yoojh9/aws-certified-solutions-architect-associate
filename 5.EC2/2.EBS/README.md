@@ -20,3 +20,20 @@ Amazon Elastic Block Store(Amazon EBS)는 EC2 인스턴스에 사용할 수 있�
 - **처리량에 최적화된 HDD(st1)**: 자주 액세스하는 처리량 집약적 워크로드에 적합한 저비용 HDD 볼륨. 저비용으로 일관되고 높은 처리량을 요구하는 스트리밍 워크로드 (빅데이터, 로그 처리, 데이터웨어하우스 )
 - **Cold HDD(sc1)**: 자주 액세스하지 않는 워크로드에 적합한 최저 비용 HDD 볼륨. File Servers
 - **EBS Magnetic(standard)**: 이전 세대 EBS 볼륨 유형. 데이터에 자주 액세스하지 않는 워크로드
+
+<br>
+
+## Volumes vs Snapshot
+
+- Volumes exist on EBS. Think of EBS as a virtual hard disk
+- Snapshots exist on S3. Think of snapshots as a photograph of the disk
+- Snapshots are point in time copies of Volumes
+- Snapshots are imcremental - this means that only the blocks that have changed since your last snapshot are moved to S3.
+- If this is your first snapshot, it may take some time to create.
+- To create a snapshot for Amazon EBS volumes that serve as root devices, you should stop the instance before taking the snapshot.
+- However you can take a snap while the instance is running
+- You can create AMI's from Snapshots.
+- You can change EBS volumes sizes on the fly, including changing the size and storage type.
+- Volumes will always be in the same availability zone as the EC2 instance.
+- To move an EC2 volume from one AZ to another, take a snapshot of it, create an AMI from the snapshot and then use the AMI to launch the EC2 instance in a new AZ.
+- To move an EC2 volume from one region to another, take a snapshot of it, create an AMI from the snapshot and then copy the AMI from one region to the other. Then use the copied AMI to launch the new EC2 instance in the new region.

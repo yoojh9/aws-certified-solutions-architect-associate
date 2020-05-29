@@ -71,3 +71,21 @@ Amazon EC2 스팟 인스턴스를 사용하면 온디맨드 요금보다 최대 
 - **Z**: Extreme Memory and CPU
 - **A**: Arm-based workloads
 - **U**: Bare Metal
+
+<br>
+
+## 4. Security Group
+
+보안 그룹은 인스턴스에 대한 인바운드 및 아웃바운드 트래픽을 제어하는 가상 방화벽 역할을 합니다.
+
+- All Inbound traffic is blocked by default.
+- All Outbound traffic is allowed.
+- Changes to Security Groups take effect immediately
+- You can have any number of EC2 instances within a security group
+- You can have multiple security groups attached to EC2 instances.
+- Security Groups are STATEFUL.
+- If you create an inbound rule allowing traffic in, that traffic is automatically allowed back out again.
+- You caannot block sepecific IP addresses using Security Groups, instead use Network Access Control Lists.
+- 허용 규칙을 지정할 수 있지만 거부 규칙은 지정할 수 없습니다.
+- 인바운드 트래픽과 아웃바운드 트래픽에 별도의 규칙을 지정할 수 있습니다.
+- 기본적으로 보안 그룹은 모든 아웃바운드 트래픽을 허용하는 아웃바운드 규칙을 포함합니다. 규칙을 제거할 수 있으며 특정 아웃바운드 트래픽만 허용하는 아웃바운드 규칙을 추가할 수 있습니다. 보안 그룹에 아웃바운드 규칙이 없는 경우 인스턴스에서 시작하는 아웃바운드 트래픽이 허용되지 않습니다.

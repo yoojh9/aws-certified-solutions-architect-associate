@@ -89,3 +89,16 @@ Amazon EC2 스팟 인스턴스를 사용하면 온디맨드 요금보다 최대 
 - 허용 규칙을 지정할 수 있지만 거부 규칙은 지정할 수 없습니다.
 - 인바운드 트래픽과 아웃바운드 트래픽에 별도의 규칙을 지정할 수 있습니다.
 - 기본적으로 보안 그룹은 모든 아웃바운드 트래픽을 허용하는 아웃바운드 규칙을 포함합니다. 규칙을 제거할 수 있으며 특정 아웃바운드 트래픽만 허용하는 아웃바운드 규칙을 추가할 수 있습니다. 보안 그룹에 아웃바운드 규칙이 없는 경우 인스턴스에서 시작하는 아웃바운드 트래픽이 허용되지 않습니다.
+
+<br>
+
+## 5. Using IAM Roles with EC2
+ - Roles are more secure than storing your access key and secret access key on individual EC2 instance.
+ - Roles are easier to manage.
+ - Roles can be assigned to an Ec2 instance after it is created using both the console & command line.
+ - Roles are universal - you can use them in any region.
+
+<br>
+
+## 6. Using Boot Strap Scripts
+ 

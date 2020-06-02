@@ -143,3 +143,18 @@ Elastic Fabric Adapter(EFA)(EFA)는 네트워크 디바이스로 Amazon EC2 인�
 
 - **Elastic Fabric Adaptor**
   For when you need to accelerate High Performance Computing(HPC) and machine learning applications or if you need to do an OS by-pass. If you see a scenario question mentioning HPC or ML and asking what network adaptor you want, choose EFA
+
+<br>
+
+## 5. Encrypted Root Device Volumes & Snapshot
+ - Snapshots of encrypted volumes are encrypted automatically
+ - Volumes restored from encrypted snapshots are encrypted automatically
+ - You can share snapshots, but only if they are unencrypted.
+ - These snapshots can be shared with other AWS accounts or made public.
+ - You can now encrypt root device volumes upon creation of the EC2 instance.
+
+ - unencrypted root device volume에서 encrypted snapshot을 만들어 encrypted instance 생성하기
+    - Create a Snapshot of the unencrypted root device volume
+    - Create a copy of the Snapshot and select the encrypt option
+    - Create an AMI from the encrypted Snapshot
+    - Use that AMI to launch new encrypted instances.

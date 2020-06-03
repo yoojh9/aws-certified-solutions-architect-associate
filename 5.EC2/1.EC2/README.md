@@ -139,3 +139,48 @@ http://169.254.169.254/latest/user-data
 - curl http://169.254.169.254/latest/meta-data/
 - curl http://169.254.169.254/latest/user-data/
 
+<br>
+
+## 8. EC2 Placement Groups
+새 EC2 인스턴스를 시작하면 EC2 서비스는 모든 인스턴스가 기본 하드웨어 전반에 분산되도록 하여 상호 관련 오류의 위험을 줄입니다. 워크로드의 유형에 따라 다음 배치 전략 중 하나를 사용하여 배치 그룹을 생성할 수 있습니다.
+
+#### Three Types of Placement Groups;
+ - Clustered Placement Group (클러스터 배치 그룹)
+    - Low Netowrk Latency / High Network Throughput
+ - Spread Placement Group (분산 배치 그룹)
+    - individual Critical EC2 instance
+ - Partitioned (파티션 배치 그룹)
+    - Multiple EC2 instances HDFS, HBase, and Cassandra
+
+### 1) Clustered Placement Group
+A cluster placement group is a grouping of instances within a single Availability Zone. Placment groups are recommended for applications that need low network latency, high network throughput, or both.
+Only certian instances can be launched in to a Clustered Placement Group.
+
+인스턴스를 가용 영역 안에 서로 근접하게 패킹합니다. 이 전략은 워크로드가 HPC 애플리케이션에서 일반적인 긴밀히 결합된 노드 간 통신에 필요한 낮은 지연 시간의 네트워크 성능을 달성할 수 있습니다. 클러스터 배치 그룹은 단일 가용 영역 내에 있는 인스턴스의 논리적 그룹입니다. 클러스터 배치 그룹은 짧은 네트워크 지연 시간, 높은 네트워크 처리량 또는 둘 다의 이점을 활용할 수 있는 애플리케이션에 권장됩니다. 또한 대부분의 네트워크 트래픽이 그룹 내 인스턴스 간에 전송되는 경우에도 권장됩니다
+
+<img src="./placement-group-cluster.png" width="250px" height="250px">
+
+### 2) Spread Placment Group
+A spread placement group is a group of instances that are each placed on distrinct underlying hardware. Spread placement groups are recommended for applications that have a small number of critical instances that should be kept seperate from each other.
+
+분산형 배치 그룹은 각각 고유한 랙에 배치된 인스턴스 그룹이며 랙마다 자체 네트워크 및 전원이 있습니다. 서로 떨어져 있어야 하는 중요 인스턴스의 수가 적은 애플리케이션에서는 분산형 배치 그룹이 권장됩니다. 분산형 배치 그룹에서 인스턴스를 시작하면 인스턴스가 동일한 랙을 공유할 때 장애가 동시에 발생할 수 있는 위험이 줄어듭니다. 분산형 배치 그룹은 별개의 랙에 대한 액세스를 제공하기 때문에 시간에 따라 인스턴스를 시작하거나 인스턴스 유형을 혼합할 때 적합합니다. 분산형 배치 그룹은 동일한 리전의 여러 가용 영역에 적용될 수 있습니다. 그룹당 가용 영역별로 최대 7개의 실행 중인 인스턴스를 가질 수 있습니다.
+
+
+<img src="./placement-group-spread.png" width="500px" height="250px">
+INDIVIDUAL INSTANCES
+
+### 3) Partitioned
+When using partition placement groups, Amazon EC2 divides each group into logical segments called partitions. Amazon EC2 ensures that each partition within a placment group has its own set of racks. Each rack has its own network and power source. No two partitions within a placement group share the same racks, allowing you to isolate the impact of hardware failure within your application.
+파티션 배치 그룹은 애플리케이션에 대한 상관 관계가 있는 하드웨어 장애 가능성을 줄이는 데 도움이 됩니다. 파티션 배치 그룹을 사용할 때 Amazon EC2는 각 그룹을 파티션이라고 하는 논리 세그먼트로 나눕니다. Amazon EC2는 배치 그룹 내 각 파티션에 자체 랙 세트가 있는지 확인합니다. 각 랙은 자체 네트워크 및 전원이 있습니다. 배치 그룹 내 두 파티션이 동일한 랙을 공유하지 않으므로 애플리케이션 내 하드웨어 장애의 영향을 격리시킬 수 있습니다.
+
+<img src="./placement-group-partition.png" width="400px" height="250px">
+MULTIPLE INSTANCES
+
+각 파티션은 여러 인스턴스로 구성됩니다. 각 파티션에 있는 인스턴스는 다른 파티션에 있는 인스턴스와 랙을 공유하지 않기 때문에 단일 하드웨어 장애의 영향을 관련 파티션으로만 국한할 수 있습니다. 파티션 배치 그룹은 동일한 리전의 여러 가용 영역에서 파티션을 가질 수 있습니다. 파티션 배치 그룹은 가용 영역당 파티션을 최대 7개까지 가질 수 있습니다.
+
+- A clustered placement group can't span multiple Availability Zones. A spread placement and partitioned group can.
+- The name you specify for a placement group must be unique within your AWS account.
+- Only certian types of instances can be launched in a placement group (Compute Optimized, GPU, Memory Optimized, Storage Optimized)
+- AWS recommend homogenous instances within clustered placement groups.
+- You can't merge placement groups.
+- You can move an existing instance into a placement group. Before you move the instance, the instance must be in the stopped state. You can move or remove an instance using the AWS CLI or an AWS SDK, you can't do it via the console yet.

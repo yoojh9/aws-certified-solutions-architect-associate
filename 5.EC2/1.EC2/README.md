@@ -101,4 +101,41 @@ Amazon EC2 스팟 인스턴스를 사용하면 온디맨드 요금보다 최대 
 <br>
 
 ## 6. Using Boot Strap Scripts
- 
+Amazon ECS 컨테이너 인스턴스를 시작할 때 사용자 데이터를 인스턴스에 전달할 수 있는 옵션이 있습니다. 이 데이터는 일반적인 구성 작업을 자동으로 수행하는 데 사용할 수 있고, 인스턴스가 부팅될 때 스크립트를 실행하는 데 사용할 수도 있습니다.
+
+```
+#!/bin/bash
+yum update -y
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+cd /var/www/html
+echo "<html><h1>Hello Cloud Gurus Welcome To My Webpage</h1></html>"  >  index.html
+aws s3 mb s3://YOURBUCKETNAMEHERE
+aws s3 cp index.html s3://YOURBUCKETNAMEHERE
+```
+
+<br>
+
+## 7. EC2 Instance Meta Data
+인스턴스 메타데이터는 실행 중인 인스턴스를 구성 또는 관리하는 데 사용될 수 있는 인스턴스 관련 데이터입니다. 인스턴스 메타데이터는 예를 들어 호스트 이름, 이벤트 및 보안 그룹과 같은 범주로 분류됩니다.
+IP 주소 169.254.169.254는 링크-로컬 주소이며 인스턴스에서만 유효합니다.
+
+실행 중인 인스턴스 내에 있는 인스턴스 메타데이터의 모든 범주를 보려면 다음 URI를 사용하십시오.
+
+```
+$ curl http://169.254.169.254/latest/meta-data/
+```
+
+실행 중인 인스턴스 내에서 사용자 데이터를 가져오려면 다음 URI를 사용합니다.
+[인스턴스 사용자 데이터 검색](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/instancedata-add-user-data.html)
+사용자 데이터를 요청하면 데이터 자체(application/octet-stream)가 반환된다. 쉼표로 구분된 텍스트 또는 스크립트로 제공된 사용자 데이터를 반환할 수 있다.
+
+```
+http://169.254.169.254/latest/user-data
+```
+
+- Used to get information about an isntance(such as public ip)
+- curl http://169.254.169.254/latest/meta-data/
+- curl http://169.254.169.254/latest/user-data/
+
